@@ -1,0 +1,6 @@
+Bundle "jistr/vim-nerdtree-tabs.git"
+Bundle "preservim/nerdtree.git"
+Bundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Bundle 'junegunn/fzf.vim'
+Bundle "xolox/vim-misc"
+Bundle "xolox/vim-session"

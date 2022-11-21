@@ -1,0 +1,1 @@
+/home/ayoub/Workspace/dotfileV2/zsh/prezto-override/zshrc /home/ayoub/.zshrc

@@ -1,0 +1,1 @@
+/home/ayoub/Workspace/dotfileV2/zsh /home/ayoub/.zsh

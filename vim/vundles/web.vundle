@@ -1,0 +1,7 @@
+" Javascript
+Bundle "prettier/vim-prettier"
+Bundle "styled-components/vim-styled-components"
+Bundle 'mxw/vim-jsx'
+
+" html
+Bundle "mattn/emmet-vim"
