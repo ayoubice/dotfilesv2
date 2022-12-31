@@ -7,8 +7,8 @@ from shutil import which
 
 # tools  to be installed
 tools = {
-	"Linux": ("vim", "tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd"),
-	"Darwin": ("vim", "tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd"),
+	"Linux": ("vim","neovim=0.7.*", "tmux", "kitty", "zsh", "curl", "git", "universal-ctags", "make", "fasd"),
+	"Darwin": ("vim", "neovim@0.7.*","tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd"),
 }
 
 
@@ -33,7 +33,6 @@ prezto_files = (
 )
 
 def setup():
-    init_submodules()
     install()
     config()
 
@@ -116,4 +115,5 @@ def config_kitty():
     os.system("rm -rf " + kitty_dir)
     os.system("ln -nfs {src}/kitty {dest}/.config/".format(src = source_base, dest = destination_base))
 
-config_kitty()
+
+install_brew()
