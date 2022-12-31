@@ -1,3 +1,4 @@
+local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
@@ -53,4 +54,3 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {})
-
