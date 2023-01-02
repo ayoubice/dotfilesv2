@@ -39,8 +39,19 @@ local on_attach = function(client, bufnr)
 end
 
 -- Set up lspconfig.
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_ok then
+	return
+end
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
+
+local status_ok, mason = pcall(require, "mason")
+if not status_ok then
+	return
+end
 
 local settings = {
 	ui = {
@@ -55,8 +66,15 @@ local settings = {
 	max_concurrent_installers = 4,
 }
 
-require("mason").setup(settings)
-require("mason-lspconfig").setup({
+mason.setup(settings)
+
+
+local status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not status_ok then
+	return
+end
+
+mason_lspconfig.setup({
 	ensure_installed = servers,
 	automatic_installation = true,
 })

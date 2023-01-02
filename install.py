@@ -8,7 +8,7 @@ from shutil import which
 # tools  to be installed
 tools = {
 	"Linux": ("vim","neovim=0.7.*", "tmux", "kitty", "zsh", "curl", "git", "universal-ctags", "make", "fasd"),
-	"Darwin": ("vim", "neovim@0.7.*","tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd"),
+	"Darwin": ("vim", "neovim","tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd"),
 }
 
 
@@ -115,5 +115,9 @@ def config_kitty():
     os.system("rm -rf " + kitty_dir)
     os.system("ln -nfs {src}/kitty {dest}/.config/".format(src = source_base, dest = destination_base))
 
+def config_nvim():
+    nvim_dir = "{dest}/.config/nvim".format(dest=destination_base)
+    os.system("rm -rf " + nvim_dir)
+    os.system("ln -nfs {src}/nvim {dest}/.config/".format(src = source_base, dest = destination_base))
 
-install_brew()
+config_nvim()
