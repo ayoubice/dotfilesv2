@@ -3,6 +3,7 @@ local servers = {
 	"sumneko_lua",
 	"pyright",
 	"jsonls",
+	"gopls",
 }
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
