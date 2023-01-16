@@ -1,5 +1,7 @@
 custom/zsh
 
+nvim/plugin/packer_compiled.lua
+
 vim/backups
 vim/view
 *un~
@@ -16,4 +18,3 @@ tmux/plugins
 bin/subl
 tags
 
-nvim/plugins/packer_compiled.lua
