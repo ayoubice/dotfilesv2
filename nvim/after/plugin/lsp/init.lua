@@ -1,6 +1,6 @@
 -- Language servers
 local servers = {
-    "sumneko_lua",
+    "lua_ls",
     "pyright",
     "jsonls",
     "gopls",
