@@ -7,8 +7,8 @@ from shutil import which
 
 # tools  to be installed
 tools = {
-	"Linux": ("vim","neovim=0.7.*", "tmux", "kitty", "zsh", "curl", "git", "universal-ctags", "make", "fasd"),
-	"Darwin": ("vim", "neovim","tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd"),
+	"Linux": ("neovim=0.7.*", "tmux", "kitty", "zsh", "curl", "git", "universal-ctags", "make", "fasd"),
+	"Darwin": ("neovim","tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd"),
 }
 
 
@@ -58,18 +58,13 @@ def install_brew():
 def config():
     copy_config()
     install_prezto()
-    install_vundler()
+    config_kitty()
+    config_nvim()
 
 def copy_config():
 	files = (
         # tmux
         'tmux/tmux.conf',
-
-        # vim
-        'vimrc',
-        'vim',
-
-        # kitty
     )
 
 	for item in files:
@@ -87,10 +82,6 @@ def copy(filepath, hidden = True):
 def unlink(file):
 	os.system("rm -f " + file)
 
-def install_vundler():
-    install_cmd = "vim +VundleInstall +qall"
-    cmd ="git clone https://github.com/gmarik/vundle.git {} && {}".format(vundle_path, install_cmd)
-    os.system(cmd)
 
 def remove_prezto():
     for item in prezto_files:
@@ -120,4 +111,4 @@ def config_nvim():
     os.system("rm -rf " + nvim_dir)
     os.system("ln -nfs {src}/nvim {dest}/.config/".format(src = source_base, dest = destination_base))
 
-config_nvim()
+setup()
