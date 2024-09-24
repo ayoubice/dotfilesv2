@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import platform, os
 from pathlib import Path
 from shutil import which
@@ -7,8 +6,8 @@ from shutil import which
 
 # tools  to be installed
 tools = {
-	"Linux": ("neovim=0.7.*", "tmux", "kitty", "zsh", "curl", "git", "universal-ctags", "make", "fasd"),
-	"Darwin": ("neovim","tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd"),
+    "Linux": ("neovim", "tmux", "kitty", "zsh", "curl", "git", "universal-ctags", "make", "fasd", "npm"),
+    "Darwin": ("neovim","tmux", "kitty", "zsh", "curl", "git", "ctags", "make", "fasd", "npm"),
 }
 
 
@@ -32,28 +31,31 @@ prezto_files = (
     'zsh/prezto/runcoms/zshenv',
 )
 
+pltform = platform.system()
+
 def setup():
     install()
     config()
 
 def install():
-	pltform = platform.system()
+    if pltform == "Linux":
+        if "arch" in platform.platform():
+            cmd_base='sudo pacman -S '
+        else:
+            cmd_base='sudo apt-get install -y '
+    elif pltform =="Darwin":
+        install_brew()
+        cmd_base="{} install ".format(brew)
+    else:
+        raise Exception("Unsupported platform")
 
-	if pltform == "Linux":
-		cmd_base='sudo apt-get install -y '
-	elif pltform =="Darwin":
-		install_brew()
-		cmd_base="{} install ".format(brew)
-	else:
-		raise Exception("Unsupported platform")
-
-	cmd= cmd_base + " ".join(tools[pltform])
-	os.system(cmd)
+    cmd= cmd_base + " ".join(tools[pltform])
+    os.system(cmd)
 
 def install_brew():
-	if which(brew) is None:
-		os.system('/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"')
-	
+    if which(brew) is None:
+        os.system('/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"')
+    
 
 def config():
     copy_config()
@@ -62,25 +64,25 @@ def config():
     config_nvim()
 
 def copy_config():
-	files = (
+    files = (
         # tmux
         'tmux/tmux.conf',
     )
 
-	for item in files:
-		copy(item)
+    for item in files:
+        copy(item)
 
 def copy(filepath, hidden = True):
-	file = os.path.basename(filepath)
-	file_dest = file
+    file = os.path.basename(filepath)
+    file_dest = file
 
-	if hidden:
-		file_dest = ".{}".format(file)
+    if hidden:
+        file_dest = ".{}".format(file)
 
-	os.system("ln -nfs {src}/{file} {dest}/{file_dest}".format(src = source_base, dest = destination_base, file = filepath, file_dest = file_dest))
+    os.system("ln -nfs {src}/{file} {dest}/{file_dest}".format(src = source_base, dest = destination_base, file = filepath, file_dest = file_dest))
 
 def unlink(file):
-	os.system("rm -f " + file)
+    os.system("rm -f " + file)
 
 
 def remove_prezto():
@@ -92,6 +94,7 @@ def install_prezto():
         os.system('git clone --recursive https://github.com/sorin-ionescu/prezto.git "zsh/zprezto"')
 
     for item in prezto_files:
+        if 
         copy(item)
 
     folders = ('.zsh.before', '.zsh.after', '.zsh.prompts')

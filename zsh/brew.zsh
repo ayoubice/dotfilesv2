@@ -1,1 +1,3 @@
-eval "$($(which brew) shellenv)"
+if [[ "$OSTYPE" == darwin* ]]; then
+    eval "$($(which brew) shellenv)"
+fi

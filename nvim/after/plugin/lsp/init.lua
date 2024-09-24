@@ -4,6 +4,7 @@ local servers = {
     "pyright",
     "jsonls",
     "gopls",
+    "graphql"
 }
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -20,7 +21,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- auto formating on save
-    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -36,8 +37,8 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workleader_folders()))
     end, bufopts)
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     -- vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end

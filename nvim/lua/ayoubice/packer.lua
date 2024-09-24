@@ -38,11 +38,9 @@ packer.init({
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
-    use 'nvim-tree/nvim-web-devicons'
 
     -- project
-    -- TODO use an explorer compatible with lua.
-    use 'preservim/nerdtree'
+    use 'nvim-tree/nvim-tree.lua'
 
     use({
         'terrortylor/nvim-comment',
@@ -62,7 +60,7 @@ return require('packer').startup(function(use)
 
     -- FZF
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
@@ -92,11 +90,38 @@ return require('packer').startup(function(use)
     }
 
     -- LSP
-    use "neovim/nvim-lspconfig" -- enable LSP
-    use "williamboman/mason.nvim" -- simple to use language server installer
+    use "neovim/nvim-lspconfig"             -- enable LSP
+    use "williamboman/mason.nvim"           -- simple to use language server installer
     use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
-    use 'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions
+    use 'jose-elias-alvarez/null-ls.nvim'   -- LSP diagnostics and code actions
 
+    -- snippet
+    use 'rafamadriz/friendly-snippets'
+    use 'L3MON4D3/LuaSnip'
+
+    -- AI
+    -- use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' } -- sourcegraph
+
+    use {
+        "zbirenbaum/copilot.lua",
+        config = function()
+            require("copilot").setup({
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = false,
+                },
+                panel = { enabled = true },
+            })
+        end
+    }
+
+    use {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function()
+            require("copilot_cmp").setup()
+        end
+    }
 
     -- Completion
     use 'hrsh7th/nvim-cmp'
@@ -104,9 +129,9 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
+    use 'saadparwaiz1/cmp_luasnip'
 
-    -- snippet
-    use 'L3MON4D3/LuaSnip'
+
 
     -- autopair
     use {
@@ -118,6 +143,8 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-dap'
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use { "leoluz/nvim-dap-go", requires = { "mfussenegger/nvim-dap" } }
+
+    use 'nvim-tree/nvim-web-devicons'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
