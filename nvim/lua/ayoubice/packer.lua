@@ -114,7 +114,6 @@ return require('packer').startup(function(use)
 
     use {
         "CopilotC-Nvim/CopilotChat.nvim",
-        branch = "master",
         requires = {
             { "zbirenbaum/copilot.lua" },
             { "nvim-lua/plenary.nvim" },
