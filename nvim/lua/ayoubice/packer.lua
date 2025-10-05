@@ -102,18 +102,7 @@ return require('packer').startup(function(use)
     -- AI
     -- use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' } -- sourcegraph
 
-    use {
-        "zbirenbaum/copilot.lua",
-        config = function()
-            require("copilot").setup({
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = false,
-                },
-                panel = { enabled = true },
-            })
-        end
-    }
+    use "zbirenbaum/copilot.lua"
 
     use {
         "zbirenbaum/copilot-cmp",
@@ -121,6 +110,14 @@ return require('packer').startup(function(use)
         config = function()
             require("copilot_cmp").setup()
         end
+    }
+
+    use {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        requires = {
+            { "zbirenbaum/copilot.lua" },
+            { "nvim-lua/plenary.nvim" },
+        },
     }
 
     -- Completion
